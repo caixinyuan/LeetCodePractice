@@ -16,7 +16,11 @@ namespace LeetCode
             //var result = solution.AddTwoNumbers(l1,l2);
 
             //var result = solution.LengthOfLongestSubstring(""dvdf"");
-            var result = primary.RemoveDuplicates(new[] { 1, 1, 2 });
+            //var result = primary.RemoveDuplicates(new[] { 1, 1, 2 });
+            //primary.Rotate(new[] { 1, 2, 3, 4, 5, 6, 7 }, 3);
+            //var result = primary.ContainsDuplicate(new[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 });
+            var result = primary.SingleNumber(new[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 });
+
         }
 
 
