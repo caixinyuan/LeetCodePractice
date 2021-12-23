@@ -112,5 +112,43 @@ namespace LeetCode
         }
 
 
+        /// <summary>
+        /// 两个数组的交集 II
+        /// 输入：nums1 = [1,2,2,1], nums2 = [2,2]
+        /// 输出：[2,2]
+        /// </summary>
+        /// <param name="nums1"></param>
+        /// <param name="nums2"></param>
+        /// <returns></returns>
+        public int[] Intersect(int[] nums1, int[] nums2)
+        {
+            Array.Sort(nums1);
+            Array.Sort(nums2);
+            int length1 = nums1.Length, length2 = nums2.Length;
+            int[] intersection = new int[Math.Min(length1, length2)];
+            //双指针
+            int index1 = 0, index2 = 0, index = 0;
+            while (index1 < length1 && index2 < length2)
+            {
+                if (nums1[index1] < nums2[index2])
+                {
+                    index1++;
+                }
+                else if (nums1[index1] > nums2[index2])
+                {
+                    index2++;
+                }
+                else
+                {
+                    intersection[index] = nums1[index1];
+                    index1++;
+                    index2++;
+                    index++;
+                }
+            }
+            return intersection.Take(index).ToArray();
+        }
+
+
     }
 }
