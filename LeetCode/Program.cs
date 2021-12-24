@@ -14,13 +14,13 @@ namespace LeetCode
             //Solution.Solution.ListNode l1 = new Solution.Solution.ListNode(2, new Solution.Solution.ListNode(4, new Solution.Solution.ListNode(3)));
             //Solution.Solution.ListNode l2 = new Solution.Solution.ListNode(5, new Solution.Solution.ListNode(6, new Solution.Solution.ListNode(4)));
             //var result = solution.AddTwoNumbers(l1,l2);
-
             //var result = solution.LengthOfLongestSubstring(""dvdf"");
             //var result = primary.RemoveDuplicates(new[] { 1, 1, 2 });
             //primary.Rotate(new[] { 1, 2, 3, 4, 5, 6, 7 }, 3);
             //var result = primary.ContainsDuplicate(new[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 });
-            var result = primary.SingleNumber(new[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 });
-
+            //var result = primary.SingleNumber(new[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 });
+            //var result = primary.PlusOne(new[] { 1, 8, 9 });
+            primary.MoveZeroes(new[] { 0, 1, 0, 3, 12 });
         }
 
 

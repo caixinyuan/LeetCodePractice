@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -149,6 +150,60 @@ namespace LeetCode
             return intersection.Take(index).ToArray();
         }
 
+        /// <summary>
+        /// 加一
+        /// 输入：digits = [1,2,3] 输出：[1,2,4] 解释：输入数组表示数字 123。
+        /// 输入：digits = [4,3,2,1]输出：[4,3,2,2] 解释：输入数组表示数字 4321。
+        /// 输入：digits = [0] 输出：[1]
+        /// </summary>
+        /// <param name="digits"></param>
+        /// <returns></returns>
+        public int[] PlusOne(int[] digits)
+        {
+            if (digits[^1] != 9)
+            {
+                digits[^1]++;
+                return digits;
+            }
+            for (int i = digits.Length - 1; i >= 0; i--)
+            {
+                if (digits[i] != 9)
+                {
+                    digits[i]++;
+                    return digits;
+                }
+                else
+                {
+                    digits[i] = 0;
+                }
+            }
+            digits = new int[digits.Length + 1];
+            digits[0] = 1;
+            return digits;
+        }
+
+
+        /// <summary>
+        /// 移动零
+        /// 输入: [0,1,0,3,12] 输出: [1,3,12,0,0]
+        /// </summary>
+        /// <param name="nums"></param>
+        public void MoveZeroes(int[] nums)
+        {
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                for (int j = 0; j < nums.Length - 1 - i; j++)
+                {
+                    if (nums[j] == 0)
+                    {
+                        int temp = nums[j];
+                        nums[j] = nums[j + 1];
+                        nums[j + 1] = temp;
+                    }
+
+                }
+            }
+        }
 
     }
 }
