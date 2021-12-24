@@ -190,20 +190,122 @@ namespace LeetCode
         /// <param name="nums"></param>
         public void MoveZeroes(int[] nums)
         {
-            for (int i = 0; i < nums.Length - 1; i++)
-            {
-                for (int j = 0; j < nums.Length - 1 - i; j++)
-                {
-                    if (nums[j] == 0)
-                    {
-                        int temp = nums[j];
-                        nums[j] = nums[j + 1];
-                        nums[j + 1] = temp;
-                    }
+            //for (int i = 0; i < nums.Length - 1; i++)
+            //{
+            //    for (int j = 0; j < nums.Length - 1 - i; j++)
+            //    {
+            //        if (nums[j] == 0)
+            //        {
+            //            int temp = nums[j];
+            //            nums[j] = nums[j + 1];
+            //            nums[j + 1] = temp;
+            //        }
 
+            //    }
+            //}
+            int index = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != 0)
+                {
+                    nums[index++] = nums[i];
+                }
+            }
+            for (int i = index; i < nums.Length; i++)
+            {
+                nums[i] = 0;
+            }
+
+        }
+
+
+        /// <summary>
+        /// 有效的数独
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        public bool IsValidSudoku(char[][] board)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                List<int> Y = new List<int>();
+                List<int> X = new List<int>();
+                List<int> Z = new List<int>();
+                for (int j = 0; j < 9; j++)
+                {
+                    if ((Y.Contains(board[i][j])) || (X.Contains(board[j][i])))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        if (board[i][j] != '.')
+                        {
+                            Y.Add(board[i][j]);
+                        }
+                        if (board[j][i] != '.')
+                        {
+                            X.Add(board[j][i]);
+                        }
+                    }
+                    int a = (i / 3) * 3 + j / 3;
+                    int b = (i % 3) * 3 + j % 3;
+                    if (board[a][b] != '.' && Z.Contains(board[a][b]))
+                    {
+                        return false;
+                    }
+                    Z.Add(board[a][b]);
+                }
+            }
+            return true;
+        }
+
+
+
+        /// <summary>
+        /// 旋转图像
+        /// </summary>
+        /// <param name="matrix"></param>
+        public void Rotate(int[][] matrix)
+        {
+            int len = matrix.Length;
+            // 水平翻转
+            for (int i = 0; i < len / 2; ++i)
+            {
+                for (int j = 0; j < len; ++j)
+                {
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[len - i - 1][j];
+                    matrix[len - i - 1][j] = temp;
+                }
+            }
+            // 主对角线翻转
+            for (int i = 0; i < len; ++i)
+            {
+                for (int j = 0; j < i; ++j)
+                {
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
                 }
             }
         }
+
+        /// <summary>
+        /// 反转字符串
+        /// </summary>
+        /// <param name="s"></param>
+        public void ReverseString(char[] s)
+        {
+            int len = s.Length;
+            for (int i = 0; i < len / 2; i++)
+            {
+                char temp = s[i];
+                s[i] = s[len - 1 - i];
+                s[len - 1 - i] = temp;
+            }
+        }
+
 
     }
 }

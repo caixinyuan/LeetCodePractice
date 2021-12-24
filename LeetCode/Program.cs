@@ -20,7 +20,8 @@ namespace LeetCode
             //var result = primary.ContainsDuplicate(new[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 });
             //var result = primary.SingleNumber(new[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 });
             //var result = primary.PlusOne(new[] { 1, 8, 9 });
-            primary.MoveZeroes(new[] { 0, 1, 0, 3, 12 });
+            //primary.MoveZeroes(new[] { 0, 1, 0, 3, 12 });
+            primary.Rotate(new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } });
         }
 
 
