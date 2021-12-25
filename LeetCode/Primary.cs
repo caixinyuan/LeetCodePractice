@@ -65,7 +65,7 @@ namespace LeetCode
             Reverse(nums, 0, k - 1);
             Reverse(nums, k, nums.Length - 1);
         }
-        public void Reverse(int[] nums, int start, int end)
+        private void Reverse(int[] nums, int start, int end)
         {
             while (start < end)
             {
@@ -304,9 +304,62 @@ namespace LeetCode
                 s[i] = s[len - 1 - i];
                 s[len - 1 - i] = temp;
             }
+        }
 
+        /// <summary>
+        /// 整数反转
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public int Reverse(int x)
+        {
+            int rev = 0;
+            while (x != 0)
+            {
+                if (rev < int.MinValue / 10 || rev > int.MaxValue / 10)
+                {
+                    return 0;
+                }
+                int digit = x % 10;
+                x /= 10;
+                rev = rev * 10 + digit;
+            }
+            return rev;
         }
 
 
+        /// <summary>
+        /// 字符串中的第一个唯一字符
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public int FirstUniqChar(string s = "aabb")
+        {
+            int l = s.Length;
+            Dictionary<char, int> keyValues = new Dictionary<char, int>();
+            for (int i = 0; i < l; i++)
+            {
+                if (keyValues.ContainsKey(s[i]))
+                {
+                    keyValues[s[i]] = -1;
+                }
+                else
+                {
+                    keyValues.Add(s[i], i);
+                }
+            }
+            foreach (var item in keyValues.Values)
+            {
+                if (item != -1 && item < l)
+                {
+                    l = item;
+                }
+            }
+            if (l==s.Length)
+            {
+                return -1;
+            }
+            return l;
+        }
     }
 }
