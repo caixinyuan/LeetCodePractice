@@ -355,11 +355,211 @@ namespace LeetCode
                     l = item;
                 }
             }
-            if (l==s.Length)
+            if (l == s.Length)
             {
                 return -1;
             }
             return l;
+        }
+
+        /// <summary>
+        /// 有效的字母异位词
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+
+        public bool IsAnagram(string s, string t)
+        {
+            s = "anagram";
+            t = "nagaram";
+            if (s.Length != t.Length)
+            {
+                return false;
+            }
+            Dictionary<char, int> keyValues = new Dictionary<char, int>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (keyValues.ContainsKey(s[i]))
+                {
+                    keyValues[s[i]] += 1;
+                }
+                else
+                {
+                    keyValues.Add(s[i], 1);
+                }
+            }
+            for (int i = 0; i < t.Length; i++)
+            {
+                if (keyValues.ContainsKey(t[i]))
+                {
+                    keyValues[t[i]] -= 1;
+                    if (keyValues[t[i]] <= 0)
+                    {
+                        keyValues.Remove(t[i]);
+                    }
+                }
+            }
+            if (keyValues.Count != 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+
+        /// <summary>
+        /// 字符串转换整数 (atoi)
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public int MyAtoi(string s)
+        {
+            s = s.Trim();
+            if (string.IsNullOrEmpty(s))
+            {
+                return 0;
+            }
+            if (s[0] != '+' && s[0] != '-' && char.IsNumber(s[0]))
+            {
+                return 0;
+            }
+            bool isPositive = s[0] != '-';
+            if (s[0] == '+' || s[0] == '-')
+            {
+                s = s[1..];
+            }
+            int number = 0;
+            try
+            {
+                for (var a = 0; a < s.Length; a++)
+                {
+                    if (!int.TryParse(s[a].ToString(), out int nums))
+                    {
+                        break;
+                    }
+                    if (number > 214748364 || (number == 214748364 && nums > 7))
+                    {
+                        return isPositive ? int.MaxValue : int.MinValue;
+                    }
+                    number = number * 10 + nums;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return isPositive ? number : -number;
+        }
+
+
+        /// <summary>
+        /// 实现 strStr()
+        /// </summary>
+        /// <param name="haystack"></param>
+        /// <param name="needle"></param>
+        /// <returns></returns>
+        public int StrStr(string haystack, string needle)
+        {
+            if (haystack.Length < needle.Length)
+            {
+                return -1;
+            }
+            if (string.IsNullOrEmpty(needle))
+            {
+                return 0;
+            }
+            var index = 0;
+            while (index < haystack.Length)
+            {
+                index = haystack.IndexOf(needle[0], index);
+                if (index < 0)
+                {
+                    return -1;
+                }
+                bool isreturn = true;
+                if (index + needle.Length > haystack.Length)
+                {
+                    return -1;
+                }
+                for (int i = 0; i < needle.Length; i++)
+                {
+                    if (needle[i] != haystack[i + index])
+                    {
+                        isreturn = false;
+                        break;
+                    }
+                }
+                if (isreturn)
+                {
+                    return index;
+                }
+                index++;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// 外观数列
+        /// 1
+        /// 11
+        /// 21
+        /// 1211
+        /// 111221
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public string CountAndSay(int n)
+        {
+            string str = "1";
+            for (int i = 2; i <= n; ++i)
+            {
+                StringBuilder sb = new StringBuilder();
+                int start = 0;
+                int pos = 0;
+
+                while (pos < str.Length)
+                {
+                    while (pos < str.Length && str[pos] == str[start])
+                    {
+                        pos++;
+                    }
+                    sb.Append(pos - start).Append(str[start]);
+                    start = pos;
+                }
+                str = sb.ToString();
+            }
+            return str;
+        }
+
+
+        /// <summary>
+        /// 最长公共前缀
+        /// </summary>
+        /// <param name="strs"></param>
+        /// <returns></returns>
+        public string LongestCommonPrefix(string[] strs)
+        {
+            if (strs == null || strs.Length == 0)
+            {
+                return "";
+            }
+            var index = 0;
+            var pre = strs[0];
+            //默认第一个字符串是他们的公共前缀
+            while (index <= pre.Length)
+            {
+                for (int i = 1; i < strs.Length; i++)
+                {
+                    if (strs[i].IndexOf(pre.Substring(0, index)) != 0)
+                    {
+                        pre = pre.Substring(0, index - 1);
+                        break;
+                    }
+                }
+                index++;
+            }
+            return pre;
         }
     }
 }
