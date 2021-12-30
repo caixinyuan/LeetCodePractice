@@ -561,5 +561,263 @@ namespace LeetCode
             }
             return pre;
         }
+
+
+
+        /**
+         * Definition for singly-linked list.
+         * public class ListNode {
+         *     public int val;
+         *     public ListNode next;
+         *     public ListNode(int x) { val = x; }
+         * }
+         */
+        /// <summary>
+        /// 删除链表中的节点
+        /// </summary>
+        /// <param name="node"></param>
+        public void DeleteNode(ListNode node)
+        {
+            //把要删除结点的下一个结点的值赋给要删除的结点
+            node.val = node.next.val;
+            //然后删除下一个结点
+            node.next = node.next.next;
+        }
+
+
+
+
+
+        /**
+         * Definition for singly-linked list.
+         * public class ListNode {
+         *     public int val;
+         *     public ListNode next;
+         *     public ListNode(int val=0, ListNode next=null) {
+         *         this.val = val;
+         *         this.next = next;
+         *     }
+         * }
+         */
+        /// <summary>
+        /// 删除链表的倒数第N个节点
+        /// 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+        /// </summary>
+        /// <param name="head"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public ListNode RemoveNthFromEnd(ListNode head, int n)
+        {
+            ListNode dummy = new ListNode(0);
+            //ListNode dummy = new ListNode(0,head);
+            int length = GetLength(head);
+            ListNode cur = dummy;
+            for (int i = 1; i < length - n + 1; ++i)
+            {
+                cur = cur.next;
+            }
+            cur.next = cur.next.next;
+            ListNode ans = dummy.next;
+            return ans;
+        }
+
+        public int GetLength(ListNode head)
+        {
+            int length = 0;
+            while (head != null)
+            {
+                ++length;
+                head = head.next;
+            }
+            return length;
+        }
+
+
+
+
+        #region ReverseList
+
+
+        /**
+         * Definition for singly-linked list.
+         * public class ListNode {
+         *     public int val;
+         *     public ListNode next;
+         *     public ListNode(int val=0, ListNode next=null) {
+         *         this.val = val;
+         *         this.next = next;
+         *     }
+         * }
+         */
+        /// <summary>
+        /// 反转链表
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public ListNode ReverseList(ListNode head = null)
+        {
+            ListNode TestNode = new ListNode(1)
+            {
+                next = new ListNode(2)
+                {
+                    next = new ListNode(3)
+                    {
+                        next = new ListNode(4)
+                        {
+                            next = new ListNode(5)
+                        }
+                    }
+                }
+            };
+
+            head = TestNode;
+
+            ListNode prev = null;
+            ListNode curr = head;
+            while (curr != null)
+            {
+                ListNode next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+            return prev;
+        }
+        #endregion
+
+        /// <summary>
+        /// 合并两个有序链表
+        /// </summary>
+        /// <param name="list1"></param>
+        /// <param name="list2"></param>
+        /// <returns></returns>
+        public ListNode MergeTwoLists(ListNode list1, ListNode list2)
+        {
+            if (list1 == null)
+                return list2;
+            if (list2 == null)
+                return list1;
+            if (list1.val < list2.val)
+            {
+                list1.next = MergeTwoLists(list1.next, list2);
+                return list1;
+            }
+            else
+            {
+                list2.next = MergeTwoLists(list1, list2.next);
+                return list2;
+            }
+
+        }
+
+
+        #region 回文链表
+
+        /// <summary>
+        /// 回文链表
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public bool IsPalindrome(ListNode head)
+        {
+            if (head == null) return true;
+
+            ListNode reversedSecondHalf = ReverseLists(GetSecondHalf(head));
+
+            while (reversedSecondHalf != null)
+            {
+                if (head.val != reversedSecondHalf.val) return false;
+                head = head.next;
+                reversedSecondHalf = reversedSecondHalf.next;
+            }
+
+            return true;
+        }
+
+        private ListNode GetSecondHalf(ListNode head)
+        {
+            ListNode fast = head, slow = head;
+
+            while (fast.next != null && fast.next.next != null)
+            {
+                fast = fast.next.next;
+                slow = slow.next;
+            }
+
+            return slow.next;
+        }
+
+        private ListNode ReverseLists(ListNode head)
+        {
+            ListNode prev = null, current = head, tmp = head;
+
+            while (current != null)
+            {
+                tmp = current.next;
+                current.next = prev;
+                prev = current;
+                current = tmp;
+            }
+
+            return prev;
+        }
+
+        #endregion
+
+
+        #region 环形链表
+        /// <summary>
+        /// 环形链表
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+
+        public bool HasCycle(ListNodes head = null)
+        {
+            ListNodes TestNode = new ListNodes(1);
+            TestNode.next = new ListNodes(2);
+
+            head = TestNode;
+            if (head == null || head.next == null)
+            {
+                return false;
+            }
+            ListNodes slow = head;
+            ListNodes fast = head.next;
+            while (slow != fast)
+            {
+                if (fast == null || fast.next == null)
+                {
+                    return false;
+                }
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            return true;
+        }
+
+        #endregion
     }
+
+
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int x) { val = x; }
+    }
+
+
+    public class ListNodes
+    {
+        public int val;
+        public ListNodes next;
+        public ListNodes(int x)
+        {
+            val = x;
+            next = null;
+        }
+    }
+
+
 }

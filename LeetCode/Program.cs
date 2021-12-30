@@ -25,7 +25,9 @@ namespace LeetCode
             //primary.IsAnagram(null, null);
             //primary.MyAtoi("-2147483647");
             //primary.StrStr("babba","bbb"); 
-            primary.LongestCommonPrefix(new string[] { "ab","a" });
+            //primary.LongestCommonPrefix(new string[] { "ab","a" });
+            //primary.ReverseList();
+            primary.HasCycle();
         }
 
 
